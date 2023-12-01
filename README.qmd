@@ -45,7 +45,7 @@ This repo contains my solutions for the [Advent of Code](https://adventofcode.co
 
 Here's my past performance:
 
-```{r}
+```{r, fig.height=3}
 past_performance %>% 
   ggplot(aes(x = year, y = stars)) +
   geom_star(fill = aoc_gold, size = 5) +
