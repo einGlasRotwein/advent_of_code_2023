@@ -3,6 +3,8 @@ day01 <- readLines("./puzzle_input/input_day01.txt")
 
 ## PART 1 ----------------------------------------------------------------------
 
+start <- Sys.time()
+
 # Get rid of anything that's not a digit
 nums <- gsub("[^0-9]", "", day01)
 
@@ -15,9 +17,13 @@ sum(calib_num)
 day01 <- readLines("./puzzle_input/input_day01.txt")
 # 53386
 
+Sys.time() - start
+
 ## PART 2 ----------------------------------------------------------------------
 
 # As always, the AoC punishes lazy solutions in part 2 ...
+
+start <- Sys.time()
 
 num_lookup <- 1:9
 names(num_lookup) <- 
@@ -60,3 +66,5 @@ calib_num <- as.numeric(paste0(first, last))
 
 sum(calib_num)
 # 53312
+
+Sys.time() - start
