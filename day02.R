@@ -1,6 +1,4 @@
 
-library(tidyverse)
-
 day02 <- readLines("puzzle_input/input_day02.txt")
 
 process_colour <- function(game, colour_name) {
