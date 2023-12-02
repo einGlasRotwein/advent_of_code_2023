@@ -3,6 +3,20 @@ library(tidyverse)
 
 day02 <- readLines("puzzle_input/input_day02.txt")
 
+process_colour <- function(game, colour_name) {
+  matches <- regexec(paste0("[0-9]+ ", colour_name), game)
+  colours <- substr(
+    game, 
+    sapply(matches, function(x) x), 
+    sapply(matches, function(x) x) + 
+      sapply(matches, function(x) attr(x, "match.length") - 1)
+  )
+  colours <- as.numeric(gsub("[^0-9]+", "", colours))
+  colours <- ifelse(is.na(colours), 0, colours)
+  
+  return(colours)
+}
+
 ## PART 1 ----------------------------------------------------------------------
 
 start <- Sys.time()
@@ -20,35 +34,9 @@ games <-
 colour_counts <- vector("list", length(games))
 
 for (i_game in seq_along(games)) {
-  red_matches <- regexec("[0-9]+ red", games[[i_game]])
-  reds <- substr(
-    games[[i_game]], 
-    sapply(red_matches, function(x) x), 
-    sapply(red_matches, function(x) x) + 
-      sapply(red_matches, function(x) attr(x, "match.length") - 1)
-  )
-  reds <- as.numeric(gsub("[^0-9]+", "", reds))
-  reds <- ifelse(is.na(reds), 0, reds)
-  
-  blue_matches <- regexec("[0-9]+ blue", games[[i_game]])
-  blues <- substr(
-    games[[i_game]], 
-    sapply(blue_matches, function(x) x), 
-    sapply(blue_matches, function(x) x) + 
-      sapply(blue_matches, function(x) attr(x, "match.length") - 1)
-  )
-  blues <- as.numeric(gsub("[^0-9]+", "", blues))
-  blues <- ifelse(is.na(blues), 0, blues)
-  
-  green_matches <- regexec("[0-9]+ green", games[[i_game]])
-  greens <- substr(
-    games[[i_game]], 
-    sapply(green_matches, function(x) x), 
-    sapply(green_matches, function(x) x) + 
-      sapply(green_matches, function(x) attr(x, "match.length") - 1)
-  )
-  greens <- as.numeric(gsub("[^0-9]+", "", greens))
-  greens <- ifelse(is.na(greens), 0, greens)
+  reds <- process_colour(games[[i_game]], "red")
+  blues <- process_colour(games[[i_game]], "blue")
+  greens <- process_colour(games[[i_game]], "green")
   
   colour_counts[[i_game]] <- list(red = reds, blue = blues, green = greens)
 }
