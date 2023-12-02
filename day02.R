@@ -53,7 +53,7 @@ possible_games <-
 sum(possible_games)
 # 2348
 
-start - Sys.time()
+Sys.time() - start
 
 ## PART 2 ----------------------------------------------------------------------
 
@@ -69,4 +69,4 @@ set_powers <-
 sum(set_powers)
 # 76008
 
-start - Sys.time()
+Sys.time() - start
