@@ -30,9 +30,10 @@ already run in part 1. Reading in the data (and sometimes, basic
 preprocessing that has nothing to do with the puzzle solution) is
 excluded from the run time calculations.
 
-| Day | Title       | Completion Time     | Rank          | Run Time        |
-|-----|-------------|---------------------|---------------|-----------------|
-| 1   | Trebuchet?! | 02:15:03 (03:50:15) | 20750 (18843) | 7.92 (83.07) ms |
+| Day | Title          | Completion Time     | Rank          | Run Time        |
+|-----|----------------|---------------------|---------------|-----------------|
+| 1   | Trebuchet?!    | 02:15:03 (03:50:15) | 20750 (18843) | 7.92 (83.07) ms |
+| 2   | Cube Conundrum | 05:21:47 (05:27:15) | 34591 (32070) | 85.35 (9.00) ms |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
