@@ -30,12 +30,14 @@ already run in part 1. Reading in the data (and sometimes, basic
 preprocessing that has nothing to do with the puzzle solution) is
 excluded from the run time calculations.
 
-| Day | Title          | Completion Time     | Rank          | Run Time           |
-|-----|----------------|---------------------|---------------|--------------------|
-| 1   | Trebuchet?!    | 02:15:03 (03:50:15) | 20750 (18843) | 7.92 (83.07) ms    |
-| 2   | Cube Conundrum | 05:21:47 (05:27:15) | 34591 (32070) | 85.35 (9.00) ms    |
-| 3   | Gear Ratios    | 02:06:12 (02:39:14) | 12256 (10955) | 171.83 (517.08) ms |
-| 4   | Scratchcards   | 04:10:29 (04:47:29) | 33850 (27365) | 29.22 (10.95) ms   |
+| Day | Title                           | Completion Time     | Rank          | Run Time           |
+|-----|---------------------------------|---------------------|---------------|--------------------|
+| 1   | Trebuchet?!                     | 02:15:03 (03:50:15) | 20750 (18843) | 7.92 (83.07) ms    |
+| 2   | Cube Conundrum                  | 05:21:47 (05:27:15) | 34591 (32070) | 85.35 (9.00) ms    |
+| 3   | Gear Ratios                     | 02:06:12 (02:39:14) | 12256 (10955) | 171.83 (517.08) ms |
+| 4   | Scratchcards                    | 04:10:29 (04:47:29) | 33850 (27365) | 29.22 (10.95) ms   |
+| 5   | If You Give A Seed A Fertilizer | 10:55:35 (-)        | 42559 (-)     | 56.7 (-) ms        |
+| 6   | Wait For It                     | 02:01:24 (02:05:10) | 17273 (16417) | 11.37 (478.78) ms  |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
