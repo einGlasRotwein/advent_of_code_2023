@@ -8,6 +8,8 @@ options(scipen = 999)
 
 ## PART 1 ----------------------------------------------------------------------
 
+start <- Sys.time()
+
 seeds <- as.numeric(unlist(strsplit(sub("seeds: ", "", day05[1]), " ")))
 day05 <- day05[-1]
 
@@ -52,3 +54,5 @@ for (i_seed in seq_along(seeds)) {
 
 min(seed_ends)
 # 26273516
+
+Sys.time() - start
