@@ -38,6 +38,7 @@ excluded from the run time calculations.
 | 4   | Scratchcards                    | 04:10:29 (04:47:29) | 33850 (27365) | 29.22 (10.95) ms   |
 | 5   | If You Give A Seed A Fertilizer | 10:55:35 (-)        | 42559 (-)     | 56.7 (-) ms        |
 | 6   | Wait For It                     | 02:01:24 (02:05:10) | 17273 (16417) | 11.37 (478.78) ms  |
+| 7   | Camel Cards                     | 03:59:51 (04:44:01) | 19094 (16453) | 128.3 (174.36) ms  |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
