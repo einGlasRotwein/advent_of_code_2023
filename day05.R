@@ -56,3 +56,128 @@ min(seed_ends)
 # 26273516
 
 Sys.time() - start
+
+## PART 2 ----------------------------------------------------------------------
+
+start <- Sys.time()
+
+# Carry seeds through the levels of the map, converting them to new ranges
+infos <- lapply(strsplit(day05$info, " "), as.numeric)
+
+day05$destination_min <- sapply(infos, `[`, 1)
+day05$destination_max <- sapply(infos, `[`, 1) + (sapply(infos, `[`, 3) - 1)
+day05$source_min <- sapply(infos, `[`, 2)
+day05$source_max <- sapply(infos, `[`, 2) + (sapply(infos, `[`, 3) - 1)
+
+# Use seed ranges (start = r1, stop = r2) instead of a single seed
+seed_r1 <- seeds[c(TRUE, FALSE)]
+seed_r2 <- seed_r1 + (seeds[c(FALSE, TRUE)] - 1)
+
+day05$info <- NULL
+
+seed_locations <- vector("list", length = length(seed_r1))
+
+for (i_seed in 1:length(seed_r1)) {
+  
+  temp_range <-
+    data.frame(
+      source_min = seed_r1[i_seed],
+      source_max = seed_r2[i_seed]
+    )
+  
+  for (j_group in unique(day05$group)) {
+    
+    row_counter <- 1
+    
+    while (row_counter <= nrow(temp_range)) {
+      
+      range_min <- temp_range$source_min[row_counter]
+      range_max <- temp_range$source_max[row_counter]
+      
+      for (k_row in 1:sum(day05$group == j_group)) {
+        
+        source_min <- day05$source_min[day05$group == j_group][k_row]
+        source_max <- day05$source_max[day05$group == j_group][k_row]
+        
+        min_in_range <- range_min >= source_min & range_min <= source_max
+        max_in_range <- range_max >= source_min & range_max <= source_max
+        
+        new_dest_min <- day05$destination_min[day05$group == j_group][k_row]
+        new_dest_max <- day05$destination_max[day05$group == j_group][k_row]
+        
+        if (min_in_range & max_in_range) {
+          
+          diff <- source_min - range_min
+          temp_range$source_min[row_counter] <- new_dest_min - diff
+          
+          diff <- source_max - range_max
+          temp_range$source_max[row_counter] <- new_dest_max - diff
+          
+          row_counter <- row_counter + 1
+          
+          break
+          
+        } else if (min_in_range) {
+          
+          new_range <- 
+            data.frame(
+              source_min = source_max + 1,
+              source_max = range_max
+            )
+          
+          diff <- source_min - range_min
+          temp_range$source_min[row_counter] <- new_dest_min - diff
+          
+          temp_range$source_max[row_counter] <- new_dest_max
+          
+          temp_range <- 
+            rbind.data.frame(
+              temp_range,
+              new_range
+            )
+          
+          row_counter <- row_counter + 1
+          
+          break
+          
+        } else if (max_in_range) {
+          
+          new_range <- 
+            data.frame(
+              source_min = range_min,
+              source_max = source_min - 1
+            )
+          
+          diff <- source_max - range_max
+          temp_range$source_max[row_counter] <- new_dest_max - diff
+          
+          # new rang min
+          temp_range$source_min[row_counter] <- new_dest_min
+          
+          temp_range <- 
+            rbind.data.frame(
+              temp_range,
+              new_range
+            )
+          
+          row_counter <- row_counter + 1
+          
+          break
+          
+        }
+        
+        if (k_row == sum(day05$group == j_group)) row_counter <- row_counter + 1
+        
+      }
+      
+    }
+    
+  }
+  
+  seed_locations[[i_seed]] <- temp_range
+  
+}
+
+min(sapply(seed_locations, function(x) min(x$source_min)))
+
+Sys.time() - start
