@@ -78,3 +78,4 @@ Reading in the data (and sometimes, basic preprocessing that has nothing to do w
 | 5   | If You Give A Seed A Fertilizer        | 10:55:35 (-) | 42559 (-)   | 56.7 (-) ms     |
 | 6   | Wait For It        | 02:01:24 (02:05:10) | 17273 (16417)   | 11.37 (478.78) ms     |
 | 7   | Camel Cards        | 03:59:51 (04:44:01) | 19094 (16453)   | 128.3 (174.36) ms     |
+| 8   | Haunted Wasteland        | 03:01:04 (03:36:02) | 19949 (13150)   | 382.2 (5308.71) ms     |
