@@ -41,6 +41,8 @@ excluded from the run time calculations.
 | 7   | Camel Cards                     | 03:59:51 (04:44:01) | 19094 (16453) | 128.3 (174.36) ms  |
 | 8   | Haunted Wasteland               | 03:01:04 (03:36:02) | 19949 (13150) | 382.2 (5308.71) ms |
 | 9   | Mirage Maintenance              | 04:07:54 (04:34:14) | 18471 (18817) | 27.62 (35.00) ms   |
+| 10  | Pipe Maze                       | 05:04:38 (-)        | 14949 (-)     | 358.46 (-) ms      |
+| 11  | Cosmic Expansion                | 13:37:18 (13:53:48) | 31790 (29731) | 46.61 (47.74) s    |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
