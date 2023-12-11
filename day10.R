@@ -12,6 +12,8 @@ source("day10_functions.R")
 
 ## PART 1 ----------------------------------------------------------------------
 
+start <- Sys.time()
+
 start_node <- which(day10 == "S")
 
 # Get all neighbours of S, the only position where the direction is not clear. 
@@ -75,3 +77,5 @@ while (length(unique(end_points)) == length(end_points)) {
 
 unique(initial_path_lengths)
 # 7063
+
+Sys.time() - start
