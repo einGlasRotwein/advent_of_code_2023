@@ -43,6 +43,7 @@ excluded from the run time calculations.
 | 9   | Mirage Maintenance              | 04:07:54 (04:34:14) | 18471 (18817) | 27.62 (35.00) ms   |
 | 10  | Pipe Maze                       | 05:04:38 (-)        | 14949 (-)     | 358.46 (-) ms      |
 | 11  | Cosmic Expansion                | 13:37:18 (13:53:48) | 31790 (29731) | 46.61 (47.74) s    |
+| 12  | Hot Springs                     | 12:33:46 (-)        | 21543 (-)     | 1.56 (-) min       |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
