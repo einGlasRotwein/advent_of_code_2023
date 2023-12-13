@@ -44,6 +44,7 @@ excluded from the run time calculations.
 | 10  | Pipe Maze                       | 05:04:38 (-)        | 14949 (-)     | 358.46 (-) ms      |
 | 11  | Cosmic Expansion                | 13:37:18 (13:53:48) | 31790 (29731) | 46.61 (47.74) s    |
 | 12  | Hot Springs                     | 12:33:46 (-)        | 21543 (-)     | 1.56 (-) min       |
+| 13  | Point of Incidence              | 05:39:28 (05:44:05) | 13716 (10433) | 34.97 (38.82) ms   |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
