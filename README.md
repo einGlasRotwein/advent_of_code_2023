@@ -3,7 +3,7 @@
 This repo contains my solutions for the [Advent of
 Code](https://adventofcode.com/) 2023 in `R`.
 
-Here’s my past performance:
+Here’s my past performance (and this year’s performance, so far):
 
 ![](README_files/figure-commonmark/unnamed-chunk-2-1.png)
 

@@ -36,14 +36,14 @@ aoc_theme <-
 
 past_performance <- 
   data.frame(
-    year = factor(2020:2022),
-    stars = c(31, 33, 30)
+    year = factor(2020:2023),
+    stars = c(31, 33, 30, 24)
   )
 ```
 
 This repo contains my solutions for the [Advent of Code](https://adventofcode.com/) 2023 in `R`.
 
-Here's my past performance:
+Here's my past performance (and this year's performance, so far):
 
 ```{r, fig.height=2.5}
 past_performance %>% 
