@@ -46,6 +46,7 @@ excluded from the run time calculations.
 | 12  | Hot Springs                     | 12:33:46 (-)        | 21543 (-)     | 1.56 (-) min       |
 | 13  | Point of Incidence              | 05:39:28 (05:44:05) | 13716 (10433) | 34.97 (38.82) ms   |
 | 14  | Parabolic Reflector Dish        | 06:37:28 (-)        | 17927 (-)     | 294.96 (-) ms      |
+| 15  | Lens Library                    | 12:21:41 (13:39:22) | 27396 (23989) | 43.83 (168.68) ms  |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
