@@ -1,8 +1,8 @@
 
 # Example input, if needed
-day18 <- readLines("./puzzle_input/input_day18_exp.txt")
+# day18 <- readLines("./puzzle_input/input_day18_exp.txt")
 
-# day18 <- readLines("./puzzle_input/input_day18.txt")
+day18 <- readLines("./puzzle_input/input_day18.txt")
 
 day18 <- as.data.frame(do.call(rbind, strsplit(day18, " ")))
 names(day18) <- c("direction", "steps", "colour")
