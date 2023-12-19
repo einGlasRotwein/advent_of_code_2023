@@ -50,6 +50,7 @@ excluded from the run time calculations.
 | 16  | The Floor Will Be Lava          | 11:28:19 (11:55:39) | 18300 (17456) | 0.13 (10.91) s     |
 | 17  | Clumsy Crucible                 | \- (-)              | \- (-)        | \- (-)             |
 | 18  | Lavaduct Lagoon                 | 04:35:45 (12:32:16) | 8859 (10645)  | 18.65 (20.66) ms   |
+| 19  | Aplenty                         | 10:33:24 (-)        | 15489 (-)     | 187.5 (-) ms       |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer

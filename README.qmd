@@ -37,7 +37,7 @@ aoc_theme <-
 past_performance <- 
   data.frame(
     year = factor(2020:2023),
-    stars = c(31, 33, 30, 31)
+    stars = c(31, 33, 30, 32)
   )
 ```
 
@@ -89,3 +89,4 @@ Reading in the data (and sometimes, basic preprocessing that has nothing to do w
 | 16   | The Floor Will Be Lava        | 11:28:19 (11:55:39) | 18300 (17456)   | 0.13 (10.91) s     |
 | 17   | Clumsy Crucible        | - (-) | - (-)   | - (-)     |
 | 18   | Lavaduct Lagoon        | 04:35:45 (12:32:16) | 8859 (10645)   | 18.65 (20.66) ms     |
+| 19   | Aplenty        | 10:33:24 (-) | 15489 (-)   | 187.5 (-) ms     |
