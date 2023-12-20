@@ -75,3 +75,117 @@ sum(sapply(parts[part_status == "A"], sum))
 # 287054
 
 Sys.time() - start
+
+## PART 2 ----------------------------------------------------------------------
+
+start <- Sys.time()
+
+# Create all paths through workflows and determine which ranges of xmas values 
+# are allowed.
+
+ranges <- 
+  list(
+    list(
+      min = c(x = 1, m = 1, a = 1, s = 1),
+      max = c(x = 4000, m = 4000, a = 4000, s = 4000)
+    )
+  )
+
+# Track all flows in case there's a loop ... (we shouldn't be allowed to go 
+# back)
+paths <- list("in")
+
+while (!all(sapply(paths, function(x) x[length(x)]) %in% c("A", "R"))) {
+  
+  new_ranges <- list()
+  new_paths <- list()
+  
+  for (i in seq_along(ranges)) {
+    
+    temp_flow_name <- paths[[i]][length(paths[[i]])]
+    template <- ranges[[i]]
+    
+    if (temp_flow_name %in% c("A", "R")) {
+      
+      to_add <- template
+      new_paths <- c(new_paths, list(paths[[i]]))
+      new_ranges <- c(new_ranges, list(to_add))
+      next
+      
+    }
+    
+    temp_flow <- workflows[[temp_flow_name]]
+    
+    for (j_flow in seq_along(temp_flow)) {
+      
+      to_add <- template
+      
+      # If there is one, apply rule. Otherwise, move part.
+      if (grepl(":", temp_flow[j_flow])) {
+        
+        rule <- gsub("(.+?)(\\:.*)", "\\1", temp_flow[j_flow])
+        letter <- substr(rule, 1, 1)
+        sign <- substr(rule, 2, 2)
+        num <- as.numeric(substr(rule, 3, nchar(rule)))
+        
+        if (sign == ">") {
+          to_add$min[letter] <- num + 1
+        } else if (sign == "<") {
+          to_add$max[letter] <- num - 1
+        }
+        
+        # Is there a loop?
+        if (any(sub(".*\\:", "", temp_flow[j_flow]) == paths[[i]])) {
+          stop("Loop detected!")
+        }
+        
+        new_paths <- 
+          c(
+            new_paths, 
+            list(c(paths[[i]], sub(".*\\:", "", temp_flow[j_flow])))
+          )
+        
+        new_ranges <- c(new_ranges, list(to_add))
+        
+        # Modify template - if a part made it to the second rule, it did not 
+        # pass the first.
+        if (sign == ">") {
+          template$max[letter] <- num
+        } else if (sign == "<") {
+          template$min[letter] <- num
+        }
+        
+      } else {
+        
+        # Is there a loop?
+        if (any(sub(".*\\:", "", temp_flow[j_flow]) == paths[[i]])) {
+          stop("Loop detected!")
+        }
+        
+        new_paths <- 
+          c(
+            new_paths, 
+            list(c(paths[[i]], sub(".*\\:", "", temp_flow[j_flow])))
+          )
+        
+        new_ranges <- c(new_ranges, list(template))
+        
+      }
+      
+    }
+    
+  }
+  
+  ranges <- new_ranges
+  paths <- new_paths
+  
+}
+
+accepted_ranges <- ranges[sapply(paths, function(x) x[length(x)]) == "A"]
+
+options(scipen = 999)
+
+sum(sapply(accepted_ranges, function(x) prod(x$max - x$min + 1)))
+# 131619440296497
+
+Sys.time() - start
