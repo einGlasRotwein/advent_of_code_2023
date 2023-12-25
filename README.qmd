@@ -37,7 +37,7 @@ aoc_theme <-
 past_performance <- 
   data.frame(
     year = factor(2020:2023),
-    stars = c(31, 33, 30, 35)
+    stars = c(31, 33, 30, 36)
   )
 ```
 
@@ -50,6 +50,7 @@ past_performance %>%
   ggplot(aes(x = year, y = stars)) +
   geom_star(fill = aoc_gold, size = 5) +
   geom_path(colour = aoc_gold, group = 1) +
+  scale_y_continuous(breaks = seq(30, 36, 2)) +
   aoc_theme
 ```
 
@@ -91,3 +92,4 @@ Reading in the data (and sometimes, basic preprocessing that has nothing to do w
 | 18   | Lavaduct Lagoon        | 04:35:45 (12:32:16) | 8859 (10645)   | 18.65 (20.66) ms     |
 | 19   | Aplenty        | 10:33:24 (>24h) | 15489 (15091)   | 168.72 (148.22) ms     |
 | 20   | Pulse Propagation        | >24h (-) | 17824 (-)   | 715.10 (-) ms     |
+| 21   | Step Counter        | >24h (-) | 21349 (-)   | 31.56 (-) s     |
