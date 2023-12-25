@@ -51,6 +51,7 @@ excluded from the run time calculations.
 | 17  | Clumsy Crucible                 | \- (-)              | \- (-)        | \- (-)             |
 | 18  | Lavaduct Lagoon                 | 04:35:45 (12:32:16) | 8859 (10645)  | 18.65 (20.66) ms   |
 | 19  | Aplenty                         | 10:33:24 (\>24h)    | 15489 (15091) | 168.72 (148.22) ms |
+| 20  | Pulse Propagation               | \>24h (-)           | 17824 (-)     | 715.10 (-) ms      |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
