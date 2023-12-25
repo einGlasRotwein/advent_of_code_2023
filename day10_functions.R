@@ -1,9 +1,9 @@
 
-pipe_travel <- function(paths, nodes, initial_path_lengths) {
+pipe_travel <- function(paths, nodes) {
   
   for (i in seq_along(paths)) {
     temp_node <- paths[[i]][length(paths[[i]])]
-    temp_previous_node <- paths[[i]][1]
+    temp_previous_node <- paths[[i]][length(paths[[i]]) - 1]
     
     # Determine what kind of pipe we have
     temp_pipe <- day10[temp_node]
@@ -104,17 +104,14 @@ pipe_travel <- function(paths, nodes, initial_path_lengths) {
     }
     
     # Don't go to the previous location
-    # Remove previous previous position to manage memory
     paths[[i]] <- 
       c(
-        paths[[i]][-1], 
+        paths[[i]], 
         temp_neighbours[temp_neighbours != temp_previous_node]
       )
     
-    initial_path_lengths[i] <- initial_path_lengths[i] + 1
-    
   }
   
-  return(list(paths, initial_path_lengths))
+  return(paths)
   
 }
