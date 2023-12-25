@@ -2,7 +2,7 @@
 ## INPUT PART 1 ----------------------------------------------------------------
 
 # Example input, if needed
-# day10 <- readLines("puzzle_input/input_day10_exp3.txt")
+# day10 <- readLines("puzzle_input/input_day10_exp6.txt")
 
 day10 <- readLines("puzzle_input/input_day10.txt")
 
@@ -38,11 +38,6 @@ pipe_paths <- ifelse(node_idx, pipe_paths, NA)
 # Eliminate paths: We can only travel to pipes where the opening is facing our 
 # current location.
 
-# down: |, L, J
-# up: |, 7, F
-# right: -, 7, J
-# left: -, L, F
-
 pipe_directions <- list(
   c("|", "L", "J"), # down
   c("|", "7", "F"), # up
@@ -58,24 +53,53 @@ valid_pipes <-
 
 pipe_paths <- pipe_paths[valid_pipes]
 
-# We always have to store the previous node, to determine the direction in 
-# which we have to travel the pipes.
+# Save the entire path (needed for part 2 later)
 pipe_paths <- lapply(pipe_paths, function(x) c(start_node, x))
-
-initial_path_lengths <- rep(1, length(pipe_paths))
 
 # Stop if at least two paths end in the same location. When two paths are 
 # equally long and end in the same location, that means a loop has been found.
 end_points <- sapply(pipe_paths, function(x) x[length(x)])
 
 while (length(unique(end_points)) == length(end_points)) {
-  travel_output <- pipe_travel(pipe_paths, day10, initial_path_lengths)
-  pipe_paths <- travel_output[[1]]
-  initial_path_lengths <- travel_output[[2]]
+  pipe_paths <- pipe_travel(pipe_paths, day10)
   end_points <- sapply(pipe_paths, function(x) x[length(x)])
 }
 
-unique(initial_path_lengths)
+unique(sapply(pipe_paths, length)) - 1
 # 7063
+
+Sys.time() - start
+
+## PART 2 ----------------------------------------------------------------------
+
+start <- Sys.time()
+
+# Build paths from the two halves
+loop <- c(pipe_paths[[1]], rev(pipe_paths[[2]])[-1])
+
+# Convert to x/y coordinates
+coordinates <- 
+  data.frame(
+    x = loop %% nrow(day10),
+    y = ceiling(loop / nrow(day10))
+  )
+
+# Anti-clockwise for shoelace
+coordinates <- coordinates[nrow(coordinates):1, ]
+
+a <- 0
+
+for (i in 1:(nrow(coordinates) - 1)) {
+  a <- a + coordinates$x[i] * coordinates$y[i + 1] - 
+    coordinates$y[i] * coordinates$x[i + 1] - 1
+}
+
+options(scipen = 999)
+
+# I don't have a clue why it's + 1 :-D
+# Also, we need to subtract the step size (always 1) for every coordinate - but 
+# not for example 5 and 6. Not sure why.
+a / 2 + 1 
+# 589
 
 Sys.time() - start
