@@ -37,7 +37,7 @@ aoc_theme <-
 past_performance <- 
   data.frame(
     year = factor(2020:2023),
-    stars = c(31, 33, 30, 36)
+    stars = c(31, 33, 30, 37)
   )
 ```
 
@@ -93,3 +93,5 @@ Reading in the data (and sometimes, basic preprocessing that has nothing to do w
 | 19   | Aplenty        | 10:33:24 (>24h) | 15489 (15091)   | 168.72 (148.22) ms     |
 | 20   | Pulse Propagation        | >24h (-) | 17824 (-)   | 715.10 (-) ms     |
 | 21   | Step Counter        | >24h (-) | 21349 (-)   | 31.56 (-) s     |
+| 22   | Sand Slabs        | - (-) | - (-)   | - (-) ms     |
+| 23   | A Long Walk        | >24h (-) | 15363 (-)   | 1.09 (-) min     |
