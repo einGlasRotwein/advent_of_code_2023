@@ -55,6 +55,7 @@ excluded from the run time calculations.
 | 21  | Step Counter                    | \>24h (-)           | 21349 (-)     | 31.56 (-) s        |
 | 22  | Sand Slabs                      | \- (-)              | \- (-)        | \- (-) ms          |
 | 23  | A Long Walk                     | \>24h (-)           | 15363 (-)     | 1.09 (-) min       |
+| 24  | Never Tell Me The Odds          | \>24h (-)           | 14619 (-)     | 557.88 (-) ms      |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer

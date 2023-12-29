@@ -37,7 +37,7 @@ aoc_theme <-
 past_performance <- 
   data.frame(
     year = factor(2020:2023),
-    stars = c(31, 33, 30, 37)
+    stars = c(31, 33, 30, 38)
   )
 ```
 
@@ -50,7 +50,10 @@ past_performance %>%
   ggplot(aes(x = year, y = stars)) +
   geom_star(fill = aoc_gold, size = 5) +
   geom_path(colour = aoc_gold, group = 1) +
-  scale_y_continuous(breaks = seq(30, 36, 2)) +
+  scale_y_continuous(
+    breaks = seq(30, 38, 2), 
+    limits = c(min(past_performance$stars) - 1, max(past_performance$stars) + 1)
+    ) +
   aoc_theme
 ```
 
@@ -95,3 +98,4 @@ Reading in the data (and sometimes, basic preprocessing that has nothing to do w
 | 21   | Step Counter        | >24h (-) | 21349 (-)   | 31.56 (-) s     |
 | 22   | Sand Slabs        | - (-) | - (-)   | - (-) ms     |
 | 23   | A Long Walk        | >24h (-) | 15363 (-)   | 1.09 (-) min     |
+| 24   | Never Tell Me The Odds        | >24h (-) | 14619 (-)   | 557.88 (-) ms     |
