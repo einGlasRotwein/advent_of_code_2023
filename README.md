@@ -12,8 +12,10 @@ it comes to completion times. Most of the code in this repo was written
 using only one hand, because I’m nursing a three-month old baby with the
 other.
 
-Follow me on [Bluesky](https://bsky.app/profile/juli-nagel.bsky.social),
-where I will post about my solutions as well!
+I solved the majority of puzzles in base `R`. I’ve marked the days where
+I used libraries with footnotes.
+
+Follow me on [Bluesky](https://bsky.app/profile/juli-nagel.bsky.social)!
 
 ## TOC
 
@@ -39,7 +41,7 @@ excluded from the run time calculations.
 | 5   | If You Give A Seed A Fertilizer | 10:55:35 (\>24h)    | 42559 (58874) | 67.84 (227.23) ms  |
 | 6   | Wait For It                     | 02:01:24 (02:05:10) | 17273 (16417) | 11.37 (478.78) ms  |
 | 7   | Camel Cards                     | 03:59:51 (04:44:01) | 19094 (16453) | 128.3 (174.36) ms  |
-| 8   | Haunted Wasteland               | 03:01:04 (03:36:02) | 19949 (13150) | 382.2 (5308.71) ms |
+| 8   | Haunted Wasteland[^2]           | 03:01:04 (03:36:02) | 19949 (13150) | 382.2 (5308.71) ms |
 | 9   | Mirage Maintenance              | 04:07:54 (04:34:14) | 18471 (18817) | 27.62 (35.00) ms   |
 | 10  | Pipe Maze                       | 05:04:38 (\>24h     | 14949 (45650) | 466.84 (46.05) ms  |
 | 11  | Cosmic Expansion                | 13:37:18 (13:53:48) | 31790 (29731) | 46.61 (47.74) s    |
@@ -56,9 +58,14 @@ excluded from the run time calculations.
 | 22  | Sand Slabs                      | \- (-)              | \- (-)        | \- (-) ms          |
 | 23  | A Long Walk                     | \>24h (-)           | 15363 (-)     | 1.09 (-) min       |
 | 24  | Never Tell Me The Odds          | \>24h (-)           | 14619 (-)     | 557.88 (-) ms      |
-| 25  | Snowverload                     | \>24h (-)           | 11479 (-)     | 219.86 (-) ms      |
+| 25  | Snowverload[^3]                 | \>24h (-)           | 11479 (-)     | 219.86 (-) ms      |
 
 [^1]: I know these stats are basically meaningless for anyone else’s
     computer, but to put things into perspective, here are my computer
     stats: Razer Blade 15 Base Model, Intel Core i7-10750H CPU @
     2.60GHz, 259 Mhz, 6 Cores, 12 Logical Processors, 16 GB RAM
+
+[^2]: **POSSIBLE SPOILERS AHEAD!** Here, I used the function `mLCM()`
+    from the package `numbers`.
+
+[^3]: Here, I shamelessly used `igraph`.
