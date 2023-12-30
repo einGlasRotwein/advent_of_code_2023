@@ -99,10 +99,11 @@ Reading in the data (and sometimes, basic preprocessing that has nothing to do w
 | 20   | Pulse Propagation        | >24h (-) | 17824 (-)   | 715.10 (-) ms     |
 | 21   | Step Counter        | >24h (-) | 21349 (-)   | 31.56 (-) s     |
 | 22   | Sand Slabs        | - (-) | - (-)   | - (-) ms     |
-| 23   | A Long Walk        | >24h (-) | 15363 (-)   | 1.09 (-) min     |
+| 23   | A Long Walk[^3]      | >24h (-) | 15363 (-)   | 57.81 (-) s     |
 | 24   | Never Tell Me The Odds        | >24h (-) | 14619 (-)   | 557.88 (-) ms     |
-| 25   | Snowverload[^3]      | >24h (-) | 11479 (-)   | 219.86 (-) ms     |
+| 25   | Snowverload[^4]      | >24h (-) | 11479 (-)   | 219.86 (-) ms     |
 
 
 [^2]: **POSSIBLE SPOILERS AHEAD!** Here, I used the function `mLCM()` from the package `numbers`.
-[^3]: Here, I shamelessly used `igraph`.
+[^3]: For part 1, I originally coded up a base `R` version that takes 1.09 min to run (`day23.R` and `day23_functions.R`). Then, I wrote a second version using `igraph` (`day23_v2.R`) which is reported here. 
+[^4]: Here, I shamelessly used `igraph`.
