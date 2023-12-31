@@ -15,8 +15,8 @@ start <- Sys.time()
 start_tile <- nrow(day23) * (which(day23[1, ] == ".") - 1) + 1
 end_tile <- nrow(day23) * (which(day23[nrow(day23), ] == ".") - 1) + nrow(day23)
 
-# Find all vertices, i.e. all ^, v, > and < tiles, and all . tiles where two 
-# corner tiles (or more) are .
+# Find all vertices, i.e. all ^, v, > and < tiles, and all . tiles where more 
+# than two corner tiles (or more) are .
 slopes <- which(day23 %in% c("v", "^", "<", ">"))
 ground <- which(day23 == ".")
 is_node <- rep(FALSE, length(ground))
@@ -32,14 +32,41 @@ for (i in seq_along(ground)) {
   
 }
 
+ground <- ground[is_node]
+
+is_critical <- rep(FALSE, length(ground))
+
+for (i in seq_along(ground)) {
+  
+  is_critical[i] <- 
+    sum(
+      day23[
+        c(
+          ground[i] + 1, 
+          ground[i] - 1, 
+          ground[i] + nrow(day23), 
+          ground[i] - nrow(day23)
+        )
+      ] == "#"
+    ) < 2
+  
+}
+
 # VERY cumbersome way to create a network from the matrix, lol
 
-vertices <- c(start_tile, slopes, ground[is_node], end_tile)
+vertices <- c(start_tile, slopes, ground, end_tile)
+
+# If it's a slope or a junction, it's a critical node (can't be deleted later).
 
 vertices_coordinates <- 
   data.frame(
     x = ifelse(vertices %% nrow(day23) == 0, nrow(day23), vertices %% nrow(day23)),
-    y = ceiling(vertices / nrow(day23))
+    y = ceiling(vertices / nrow(day23)),
+    is_critical = c(TRUE, rep(TRUE, length(slopes)), is_critical, TRUE),
+    directional = 
+      c(
+        FALSE, rep(TRUE, length(slopes)), rep(FALSE, length(is_critical)), FALSE
+      )
   )
 
 vertices_coordinates <- 
@@ -47,15 +74,13 @@ vertices_coordinates <-
 
 rownames(vertices_coordinates) <- NULL
 
-nw_info <- data.frame(from = c(), to = c(), weight = c())
+nw_info <- data.frame(from = c(), to = c(), weight = c(), directional = c())
 
 for (i in 1:nrow(vertices_coordinates)) {
   
   # Get adjacent node to the right or down (left and up should be redundant),
   # i.e. the nearest nodes right/down. Determine whether there's a connection 
   # and how long the edge is.
-  # If the edge is directed, only add to -> from - if it's not directed, add 
-  # to -> from and from -> to
   temp_tile <- day23[vertices_coordinates$x[i], vertices_coordinates$y[i]]
   
   right <- 
@@ -87,23 +112,11 @@ for (i in 1:nrow(vertices_coordinates)) {
             rbind.data.frame(
               nw_info,
               data.frame(
-                from = paste(right[1, ], collapse = "-"), 
-                to = paste(vertices_coordinates[i, ], collapse = "-"), 
+                from = paste(right[1, 1:2], collapse = "-"), 
+                to = paste(vertices_coordinates[i, 1:2], collapse = "-"), 
                 weight = right$y[1] - vertices_coordinates$y[i]
               )
             )
-          
-        } else if (temp_tile == ">") {
-          
-          nw_info <- 
-            rbind.data.frame(
-              nw_info,
-              data.frame(
-                from = paste(vertices_coordinates[i, ], collapse = "-"), 
-                to = paste(right[1, ], collapse = "-"), 
-                weight = right$y[1] - vertices_coordinates$y[i]
-              )
-            ) 
           
         } else {
           
@@ -111,15 +124,10 @@ for (i in 1:nrow(vertices_coordinates)) {
             rbind.data.frame(
               nw_info,
               data.frame(
-                from = c(
-                  paste(vertices_coordinates[i, ], collapse = "-"),
-                  paste(right[1, ], collapse = "-")
-                ), 
-                to = c(
-                  paste(right[1, ], collapse = "-"),
-                  paste(vertices_coordinates[i, ], collapse = "-")
-                ), 
-                weight = right$y[1] - vertices_coordinates$y[i]
+                from = paste(vertices_coordinates[i, 1:2], collapse = "-"), 
+                to = paste(right[1, 1:2], collapse = "-"), 
+                weight = right$y[1] - vertices_coordinates$y[i],
+                directional = ifelse(temp_tile == ">", TRUE, FALSE)
               )
             ) 
           
@@ -148,23 +156,12 @@ for (i in 1:nrow(vertices_coordinates)) {
             rbind.data.frame(
               nw_info,
               data.frame(
-                from = paste(down[1, ], collapse = "-"), 
-                to = paste(vertices_coordinates[i, ], collapse = "-"), 
-                weight = down$x[1] - vertices_coordinates$x[i]
+                from = paste(down[1, 1:2], collapse = "-"), 
+                to = paste(vertices_coordinates[i, 1:2], collapse = "-"), 
+                weight = down$x[1] - vertices_coordinates$x[i],
+                directional = TRUE
               )
             )
-          
-        } else if (temp_tile == "v") {
-          
-          nw_info <- 
-            rbind.data.frame(
-              nw_info,
-              data.frame(
-                from = paste(vertices_coordinates[i, ], collapse = "-"), 
-                to = paste(down[1, ], collapse = "-"), 
-                weight = down$x[1] - vertices_coordinates$x[i]
-              )
-            ) 
           
         } else {
           
@@ -172,15 +169,10 @@ for (i in 1:nrow(vertices_coordinates)) {
             rbind.data.frame(
               nw_info,
               data.frame(
-                from = c(
-                  paste(vertices_coordinates[i, ], collapse = "-"),
-                  paste(down[1, ], collapse = "-")
-                ), 
-                to = c(
-                  paste(down[1, ], collapse = "-"),
-                  paste(vertices_coordinates[i, ], collapse = "-")
-                ), 
-                weight = down$x[1] - vertices_coordinates$x[i]
+                from = paste(vertices_coordinates[i, 1:2], collapse = "-"), 
+                to = paste(down[1, 1:2], collapse = "-"), 
+                weight = down$x[1] - vertices_coordinates$x[i],
+                directional = ifelse(temp_tile == "v", TRUE, FALSE)
               )
             ) 
           
@@ -194,15 +186,87 @@ for (i in 1:nrow(vertices_coordinates)) {
   
 }
 
-nw <- graph_from_edgelist(as.matrix(nw_info[ , 1:2]), directed = TRUE)
+# Repeat non-directional nodes on other direction.
+nw_info <- 
+  rbind.data.frame(
+    nw_info,
+    data.frame(
+      from = nw_info$to[!nw_info$directional],
+      to = nw_info$from[!nw_info$directional],
+      weight = nw_info$weight[!nw_info$directional],
+      directional = FALSE
+    )
+  )
 
-E(nw)$weight <- nw_info$weight
+# Delete non-critical nodes
+vertices_coordinates$id <- 
+  apply(
+    vertices_coordinates[, 1:2], 
+    1, 
+    function(x) paste(x, collapse = "-")
+  )
+
+critical_vertices <- 
+  nw_info[
+    nw_info$from %in% vertices_coordinates$id[vertices_coordinates$is_critical], 
+  ]
+
+rownames(critical_vertices) <- NULL
+
+new_vertices <- data.frame(from = c(), to = c(), weight = c())
+
+for (i in 1:nrow(critical_vertices)) {
+  
+  temp_from <- critical_vertices$from[i]
+  temp_to <- critical_vertices$to[i]
+  weight_counter <- critical_vertices$weight[i]
+  
+  # Find next critical node and delete all in between
+  while (!temp_to %in% critical_vertices$from) {
+    
+    previous <- temp_to
+    
+    temp_weight <- 
+      nw_info$weight[
+        nw_info$from == temp_to & nw_info$to != temp_from
+      ]
+    
+    temp_to <- 
+      nw_info$to[
+        nw_info$from == temp_to & nw_info$to != temp_from
+      ]
+    
+    if (length(temp_to) == 0) break
+    
+    temp_from <- previous
+    
+    weight_counter <- weight_counter + temp_weight
+    
+  }
+  
+  if (length(temp_to) == 0) next
+  
+  new_vertices <- 
+    rbind.data.frame(
+      new_vertices,
+      data.frame(
+        from = critical_vertices$from[i],
+        to = temp_to,
+        weight = weight_counter
+      )
+    )
+  
+}
+
+nw <- graph_from_edgelist(as.matrix(new_vertices[ , 1:2]), directed = TRUE)
+
+E(nw)$weight <- new_vertices$weight
 
 all_paths <- 
   all_simple_paths(
     nw,
-    paste0(vertices_coordinates[1, ], collapse = "-"), 
-    paste0(vertices_coordinates[nrow(vertices_coordinates), ], collapse = "-")
+    paste0(vertices_coordinates[1, 1:2], collapse = "-"), 
+    paste0(vertices_coordinates[nrow(vertices_coordinates), 1:2], collapse = "-")
   )
 
 # It seems like I can't simply get the weight of a path?!
@@ -218,7 +282,7 @@ for (i in seq_along(all_paths)) {
     x <- names(all_paths[[i]][j])
     y <- names(all_paths[[i]][j + 1])
     temp_weight <-  temp_weight +
-      nw_info$weight[nw_info$from == x & nw_info$to == y]
+      new_vertices$weight[new_vertices$from == x & new_vertices$to == y]
     
   }
   
