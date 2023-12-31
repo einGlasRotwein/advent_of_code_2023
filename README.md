@@ -69,7 +69,8 @@ excluded from the run time calculations.
     from the package `numbers`.
 
 [^3]: For part 1, I originally coded up a base `R` version that takes
-    1.09 min to run (`day23.R` and `day23_functions.R`). Then, I wrote a
-    second version using `igraph` (`day23_v2.R`) which is reported here.
+    1.09 min to run (`day23_pt1.R` and `day23_functions.R`). Then, I
+    wrote a second version using `igraph` (`day23_pt1_v2.R`) which is
+    reported here.
 
 [^4]: Here, I shamelessly used `igraph`.
