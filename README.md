@@ -56,7 +56,7 @@ excluded from the run time calculations.
 | 20  | Pulse Propagation               | \>24h (-)           | 17824 (-)     | 715.10 (-) ms      |
 | 21  | Step Counter                    | \>24h (-)           | 21349 (-)     | 31.56 (-) s        |
 | 22  | Sand Slabs                      | \- (-)              | \- (-)        | \- (-) ms          |
-| 23  | A Long Walk[^3]                 | \>24h (-)           | 15363 (-)     | 6.53 (-) s         |
+| 23  | A Long Walk[^3]                 | \>24h (\>24)        | 15363 (13284) | 6.53 s (9.90 h)    |
 | 24  | Never Tell Me The Odds          | \>24h (-)           | 14619 (-)     | 557.88 (-) ms      |
 | 25  | Snowverload[^4]                 | \>24h (-)           | 11479 (-)     | 219.86 (-) ms      |
 
@@ -71,6 +71,7 @@ excluded from the run time calculations.
 [^3]: For part 1, I originally coded up a base `R` version that takes
     1.09 min to run (`day23_pt1.R` and `day23_functions.R`). Then, I
     wrote a second version using `igraph` (`day23_pt1_v2.R`) which is
-    reported here.
+    reported here. For part 2, there is only one version using
+    `igraph`(`day23_pt2.R`).
 
 [^4]: Here, I shamelessly used `igraph`.
